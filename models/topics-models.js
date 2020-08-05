@@ -1,10 +1,14 @@
-const knex = require('../db/connection')
+const connection = require('../db/connection')
+const app = require('../server')
 
 exports.fetchTopics = () => {
-    return knex
-    .select('slug', 'description')
-    .from('topics').then((topics) => {
-        return {topics}
-        })
+    return connection
+    .select("*")
+    .from('topics')
+    .returning("*")
+    .then((topics) => {
+        console.log(topics)
+      return topics;
+    });
    
 }

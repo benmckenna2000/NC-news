@@ -1,3 +1,4 @@
+const express = require('express')
 const{
     sendTopics
 } = require('../controllers/topics-controller')
@@ -5,7 +6,7 @@ const{
 const topicsRouter = express.Router();
 
 
-topicsRouter.route('/').get(fetchTopics)
+topicsRouter.route('/').get(sendTopics)
 
 
 
