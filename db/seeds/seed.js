@@ -28,9 +28,9 @@ exports.seed = function(knex) {
       
       const formattedComments = formatComments(commentData, articleRef);
 
-      console.log(formattedComments)
+      
       return knex('comments').insert(formattedComments);
     }).then(()=>{
-      console.log('hi')
+      
     })
 };

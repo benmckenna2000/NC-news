@@ -5,7 +5,7 @@ const{
 
 const usersRouter = express.Router()
 
-usersRouter.use('/:username').get(sendUser)
+usersRouter.route('/:username').get(sendUser)
 
 
 module.exports = usersRouter

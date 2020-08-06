@@ -22,14 +22,41 @@ describe('app', ()=>{
     })
     test('GET USERNAMES: 200 - responds with a specified username', () => {
         return supertest(app)
-         .get('/api/users/grumpy19')
+         .get('/api/users/rogersop')
          .expect(200)
          .then((res)=> {
-             res.body.users.forEach((user)=>{
+              const user = res.body.user
                  expect(user).toHaveProperty('username')
                  expect(user).toHaveProperty('avatar_url')
                  expect(user).toHaveProperty('name')
-             })
          })
+    })
+    test('GET ARTICLE: 200 - responds with the correct article', () => {
+      return supertest(app)
+       .get('/api/articles/1')
+       .expect(200)
+       .then((res) => {
+         const article = res.body.article
+         expect(article).toHaveProperty('title')
+         expect(article).toHaveProperty('body')
+         expect(article).toHaveProperty('topic')
+         expect(article).toHaveProperty('votes')
+         expect(article).toHaveProperty('author')
+         expect(article).toHaveProperty('article_id')
+         expect(article).toHaveProperty('created_at')
+         
+       })
+    })
+    test.only("PATCH: 200 - returns an updated vote for the given article ID", () => {
+      return supertest(app)
+        .patch("/api/articles/1")
+        .send({
+          inc_votes: 1,
+        })
+        .expect(200)
+        .then((res) => {
+          console.log(res.body.article)
+          expect(res.body.articles.votes).toBe('110')
+        });
     })
 })
