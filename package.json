@@ -24,9 +24,13 @@
     "datejs": "^1.0.0-rc3",
     "express": "^4.17.1",
     "jest": "^26.2.2",
+    "jest-sorted": "^1.0.6",
     "knex": "^0.21.2",
     "pg": "^8.3.0",
     "supertest": "^4.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "jest": {
+    "setupFilesAfterEnv": ["jest-sorted"]
+  }
 }
