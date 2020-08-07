@@ -103,11 +103,12 @@ exports.fetchCommentsByArticleId = (sort_by = 'created_at', order = 'desc', arti
 exports.deleteArticle = (articleId) => {
   return connection
   .select(
-  "articles.*"
-  )
-  .from("articles")
-  .where("articles.article_id", articleId)
-  .count("comments.article_id as comment_count")
-  .leftJoin("comments", "comments.article_id", "articles.article_id")
-  .del()
-}
+    "articles.*"
+   )
+   .from("articles")
+   .count("comments.comment_id as comment_count")
+   .groupBy("articles.article_id")
+   .leftJoin("comments", "comments.article_id", "articles.article_id")
+   .where("articles.article_id", "=", articleId)
+   .del()
+  }

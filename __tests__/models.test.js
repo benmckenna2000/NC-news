@@ -70,7 +70,7 @@ describe("app", () => {
       });
   });
   test("DELETE ARTICLE: /api/articles/:articleId - 204 - delete article with the given article ID", () => {
-    return supertest(app).delete("/api/articles/1").expect(204);
+    return supertest(app).delete("/api/articles/2").expect(204);
   });
   test("POST COMMENTS: /api/articles/:articleId/comments - 200 - posts a comment for the specified user", () => {
     let newComment = {
@@ -104,7 +104,6 @@ describe("app", () => {
       )
       .expect(404)
       .then((res) => {
-        console.log(res.body)
         expect(res.body.msg).toBe("Username not found!");
       });
   });

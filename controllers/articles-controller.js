@@ -50,6 +50,7 @@ const sendCommentsByArticle = (req, res, next) => {
 
 const deleteArticleById = (req, res, next) => {
   const { articleId } = req.params;
+  
   deleteArticle(articleId).then(() => {
     res.sendStatus(204);
   });

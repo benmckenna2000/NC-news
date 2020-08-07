@@ -11,7 +11,7 @@
     "seed": "knex seed:run",
     "test": "jest --watch",
     "migrate-latest": "knex migrate:latest",
-    "start": "node listen.js",
+    "start": "node listen.js"
   },
   "repository": {
     "type": "git",
