@@ -31,7 +31,7 @@ describe("app", () => {
         expect(user).toHaveProperty("name");
       });
   });
-  test.only("GET ALL USERS: /api/users - 200 - responds with all usernames", () => {
+  test("GET ALL USERS: /api/users - 200 - responds with all usernames", () => {
     return supertest(app)
       .get("/api/users")
       .expect(200)
@@ -69,10 +69,10 @@ describe("app", () => {
         expect(res.body.article.votes).toBe(110);
       });
   });
-  test("DELETE ARTICLE: /api/articles/:articleId - 200 - delete article with the given article ID", () => {
+  test("DELETE ARTICLE: /api/articles/:articleId - 204 - delete article with the given article ID", () => {
     return supertest(app).delete("/api/articles/1").expect(204);
   });
-  test("POST COMMENTS: /api/articles/:articleId/comments - 200 - returns a comment for the specified user", () => {
+  test("POST COMMENTS: /api/articles/:articleId/comments - 200 - posts a comment for the specified user", () => {
     let newComment = {
       body: "gold",
       username: "butter_bridge",
@@ -83,13 +83,29 @@ describe("app", () => {
       .send(newComment)
       .expect(200)
       .then((res) => {
-        expect(res.body.comments)
-          .toEqual
-          // expect.objectContaining({
-          //   votes: expect.any(String),
-          //   created_at: expect.any(String),
-          // })
-          ();
+        expect(res.body.comment).toEqual(
+          expect.objectContaining({
+            comment_id: expect.any(Number),
+            article_id: expect.any(Number),
+            body: expect.any(String),
+          })
+        );
+      });
+  });
+  test("POST COMMENTS: /api/articles/:articleId/comments - 404 - returns an error when client posts to a non exisiting username", () => {
+    let newComment = {
+      username: "Smeagle",
+      body: "Golden"
+    }
+    return supertest(app)
+      .post("/api/articles/1/comments")
+      .send(
+        newComment
+      )
+      .expect(404)
+      .then((res) => {
+        console.log(res.body)
+        expect(res.body.msg).toBe("Username not found!");
       });
   });
   test("GET COMMENTS QUERY: /api/articles/:article_id/comments?order=desc - 200 - will sort comments", () => {

@@ -4,8 +4,12 @@ const apiRouter = require("./routers/apiRouter");
 const app = express();
 app.use(express.json());
 app.use("/api", apiRouter);
+
 app.use((err, req, res, next) => {
     console.log(err)
-    res.sendStatus(500)
-})
+    if(err.code === '23503') {
+      res.status(404).send({msg: 'Username not found!'})
+    }
+  });
+  
 module.exports = app

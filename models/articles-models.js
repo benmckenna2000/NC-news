@@ -33,13 +33,16 @@ exports.fetchUpdatedArticle = (articleId, inc_votes) => {
 };
 
 exports.postComments = (newComment, articleId) => {
+  
   return connection
     .insert({ body: newComment.body, author: newComment.username, article_id: articleId })
     .into("comments")
+    .where('comments.article_id', '=', articleId)
+    .count("comments.article_id as comment_count")
     .returning("*")
     .then((comment) => {
-      console.log(comment[0]);
-      return comment;
+      console.log(comment[0])
+      return comment[0];
     });
 };
 
@@ -89,7 +92,7 @@ exports.fetchCommentsByArticleId = (sort_by = 'created_at', order = 'desc', arti
   return connection
   .select("comments.*")
   .from('comments')
-  .where("articles.article_id", "=", articleId)
+  .where("comments.article_id", "=", articleId)
   .orderBy(sort_by, order)
   .then((comments) => {
     return comments

@@ -7,6 +7,7 @@ exports.fetchUpdatedComment = (commentId, inc_votes) => {
     .increment("votes", inc_votes)
     .returning("*")
     .then((comment) => {
+      console.log(comment)
       return comment[0];
     });
 };
