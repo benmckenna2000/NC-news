@@ -20,6 +20,25 @@ describe("app", () => {
         });
       });
   });
+  test('POST TOPIC: /api/topics - 200 - posts a new topic', () => {
+    let newTopic = {
+      slug: "gold",
+      description: "a very shiny material",
+    };
+    return supertest(app)
+      .post("/api/topics")
+      .send(newTopic)
+      .expect(200)
+      .then((res) => {
+        console.log(res.body)
+        expect(res.body.topic).toEqual(
+          expect.objectContaining({
+            slug: expect.any(String),
+            description: expect.any(String),
+          })
+        );
+      });
+  });
   test("GET USERNAME: /api/users/:username - 200 - responds with a specified username", () => {
     return supertest(app)
       .get("/api/users/rogersop")

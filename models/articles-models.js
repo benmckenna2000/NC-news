@@ -112,3 +112,7 @@ exports.deleteArticle = (articleId) => {
    .where("articles.article_id", "=", articleId)
    .del()
   }
+
+// exports.postArticle = () => {
+
+// }

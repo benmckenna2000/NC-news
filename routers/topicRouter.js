@@ -1,12 +1,14 @@
 const express = require('express')
 const{
-    sendTopics
-} = require('../controllers/topics-controller')
+    sendTopics,
+    sendNewTopic
+} = require('../controllers/topics-controller');
+
 
 const topicsRouter = express.Router();
 
 
-topicsRouter.route('/').get(sendTopics)
+topicsRouter.route('/').get(sendTopics).post(sendNewTopic)
 
 
 

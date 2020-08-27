@@ -56,6 +56,13 @@ const deleteArticleById = (req, res, next) => {
   });
 };
 
+// const sendNewArticle = (req, res, next) => {
+
+//   postArticle().then((article) => {
+//     res.send({article}).status(200)
+//   })
+// }
+
 module.exports = {
   sendArticle,
   sendUpdatedArticle,
@@ -63,4 +70,5 @@ module.exports = {
   sendArticles,
   sendCommentsByArticle,
   deleteArticleById,
+  // sendNewArticle
 };
