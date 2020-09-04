@@ -20,7 +20,7 @@ describe("app", () => {
         });
       });
   });
-  test('POST TOPIC: /api/topics - 200 - posts a new topic', () => {
+  test("POST TOPIC: /api/topics - 200 - posts a new topic", () => {
     let newTopic = {
       slug: "gold",
       description: "a very shiny material",
@@ -30,7 +30,7 @@ describe("app", () => {
       .send(newTopic)
       .expect(200)
       .then((res) => {
-        console.log(res.body)
+        console.log(res.body);
         expect(res.body.topic).toEqual(
           expect.objectContaining({
             slug: expect.any(String),
@@ -114,13 +114,11 @@ describe("app", () => {
   test("POST COMMENTS: /api/articles/:articleId/comments - 404 - returns an error when client posts to a non exisiting username", () => {
     let newComment = {
       username: "Smeagle",
-      body: "Golden"
-    }
+      body: "Golden",
+    };
     return supertest(app)
       .post("/api/articles/1/comments")
-      .send(
-        newComment
-      )
+      .send(newComment)
       .expect(404)
       .then((res) => {
         expect(res.body.msg).toBe("Username not found!");

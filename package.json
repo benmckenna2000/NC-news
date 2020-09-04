@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/northcoders/be-nc-news#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "datejs": "^1.0.0-rc3",
     "express": "^4.17.1",
     "jest": "^26.2.2",
@@ -35,6 +36,8 @@
   },
   "devDependencies": {},
   "jest": {
-    "setupFilesAfterEnv": ["jest-sorted"]
+    "setupFilesAfterEnv": [
+      "jest-sorted"
+    ]
   }
 }
