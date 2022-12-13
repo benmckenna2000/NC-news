@@ -27,7 +27,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "datejs": "^1.0.0-rc3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jest": "^26.2.2",
     "jest-sorted": "^1.0.6",
     "knex": "^0.21.2",
